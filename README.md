@@ -6,7 +6,7 @@ Some notes here
 
 Trying code block with `node`:
 
-```node
+```nodejs
 node -v
 npm -init
 ```
