@@ -13,7 +13,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const fse = require('fs-extra')
 ```
 
-Lines 9-15 is a variable for PostCSS and all the packages associated with it:
+Lines 9-15 is a variable for PostCSS and most of the packages associated with it:
 ```js
 const postCSSPlugins = [
   require("postcss-import"),
@@ -38,8 +38,6 @@ class RunAfterCompile {
 }
 ```
 
-Temp notes: back into webpack.config, and in the module > rules > use we want to add another loader – but instead of adding it’s name like the other 2, we need to add an oblect > it gets a few options: 1. loader, holy shit on the next one – around 15:30
-
 Lines 25-28 is creating an object to find any `css` file and setting properties of `use` and `postcssOptions`. 
 
 ```js
@@ -50,7 +48,7 @@ let cssConfig = {
 ```
 This is to  go in the `rules` array which is inside the `module` object. It gets 2 properties: 1) called `test` and it gets a RegEx, 2) then `use` which is an array for the packages with obejcts inside with properties of `loader` and `options` and `postcssOptions` which is an object that has a `plugins` property which calls the variable on line 9.
 
-Lines 30-37 sets a variable called `pages` to an fe-extra method called `readdirSync` which returns an array of every file in the app folder: `filter` only returns html files, `map` will let us generate a new array based on the filter array. We don’t want just an array of file names, we want an array of multiple html webpack plugins – we want to use the webpack plugin once for each of out html templates. 
+Lines 30-37 sets a variable called `pages` to an `fs-extra` method called `readdirSync` which returns an array of every file in the app folder: `filter` only returns html files, `map` will let us generate a new array based on the filter array. We don’t want just an array of file names, we want an array of multiple html webpack plugins – we want to use the webpack plugin once for each of out html templates. 
 
 ```js 
 let pages = fse.readdirSync('./app').filter(function (file) {
@@ -243,7 +241,9 @@ module.exports = config
 
 ## Netlify notes
 
-To set things up for netlify we will set up our build process to be completely automated. You won’t need a `dist` or `docs` folder on your computer, just work with your `app` folder. And any time you push your changes up, Netlify will run our build process for us and generate the public folder on its own. 
+To set things up for Netlify we will set up our build process to be completely automated. You won’t need a `dist` or `docs` folder on your computer, just work with your `app` folder. And any time you push your changes up, Netlify will run our build process for us and generate the public folder on its own. 
+
+**QUESTION**: Do you HAVE to set up your project with webpack and a build process to use it on Netlify?
 
 It an alternative to traditional web hosting – they host our files and make out site available to the public. You have a few diff ways to create your first site with netlify:
 
@@ -254,4 +254,4 @@ Then choose where your git repo lives – Authorize Netlify – choose all repos
 
 Becaause we deleted our docs folder, our github pages site will no longer work. Even though Netlify will do the builds for us, there may be a time in the future where we need to adjust our build process - you really only want your source code in the repo. So go into `gitignore`, add `docs/` below `node_modules/`. 
 
-More notes about Functions on Netlify and netlify > Deploys tab. 
+More notes about Functions on Netlify and Netlify > Deploys tab. 
