@@ -77,6 +77,12 @@ https.get(myPhotoLocation, function (response) {
 });
 ```
 
+Also: 
+```js
+tap()
+fs.copySync()
+```
+
 ## Common NPM packages and commands
 
 Common packages: `webpack`, `express`, `mongodb`, `postcss`, `react-dom`, `lodash`, `normalize.css`, etc.
@@ -132,22 +138,58 @@ npm install lodash
 npm install normalize.css
 npm install lodash
 npm install lazysizes
+// to search for any html file:
 npm install fs-extra --save-dev
 npm install axios
 ```
 
 ## Webpack and webpack.config.js commands:
 
+Out of the box without any config, webpack only understands js files. To start using webpack you need to install 2 packages:
+
 ```js
-create webpack.config.js
 npm install webpack webpack-cli  --save-dev
+```
+Then y ou need to create a config file in your root directory called `webpack.config.js`. In it you tell webpack what you want it to do – you only need one property: `entry`. Then type the path to the file you want to bundle. 
+
+To tell webpack hot to process and bundle the file(s), you need to include `module.exports =` then the obejct `{…}`. 
+
+Now go into `package.json` and look for a property called `scripts`. You can create an **npm script** which you can run from the command line:
+
+```js
+"scripts": {
+    "dev": "webpack serve",
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+// To run that, on command line use:
+npm run dev
+```
+
+`npm run build` creates a `dist` folder and a new file called `main.js`. To change the file name (`main.js`) or for the bundled file to go into a different folder other than `dist`, use: 
+
+```js
+output = {
+    filename: 'bundled.js',
+    path: path.resolve(__dirname, 'app')
+  }
+```
+
+Webpack requires an absolute path for the output, so you need to **require** in the node.js `path` package: `npm install path`. Then delete the `dist` folder, make a change in your js file then run `npm run build`. To have your file update automatically add:
+
+```js
+mode = watch: true
+```
+See webpack.config.js.md for detailed notes for that file, and package.json.md for notes on that file.
+
+```js
 npm install webpack-dev-server --save-dev
 npm install html-webpack-plugin --save-dev
 npm run build
 npm run dev
 ```
 
-## webpack.config.js code
+create webpack.config.js
 
 ```js
 watch: true
