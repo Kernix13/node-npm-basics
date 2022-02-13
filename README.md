@@ -180,7 +180,7 @@ Webpack requires an absolute path for the output, so you need to **require** in 
 ```js
 mode = watch: true
 ```
-See webpack.config.js.md for detailed notes for that file, and package.json.md for notes on that file.
+See [webpack.config.js.md](https://github.com/Kernix13/node-npm-basics/blob/master/webpack.config.js.md) for detailed notes for that file, and [package.json.md](https://github.com/Kernix13/node-npm-basics/blob/master/package.json.md) for notes on that file.
 
 ```js
 npm install webpack-dev-server --save-dev
