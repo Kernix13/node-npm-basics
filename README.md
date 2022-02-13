@@ -136,7 +136,6 @@ npm install @babel/core @babel/preset-env babel-loader --save-dev
 ```js
 npm install lodash
 npm install normalize.css
-npm install lodash
 npm install lazysizes
 // to search for any html file:
 npm install fs-extra --save-dev

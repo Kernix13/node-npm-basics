@@ -1,6 +1,8 @@
 # Webpack config example
 
-Notes on the file from my repo `travel-site`:
+Notes on my [webpack.config.js file](https://github.com/Kernix13/travel-site/blob/master/webpack.config.js "Webpack config file") from my repo `travel-site`:
+
+Temp notes: back into webpack.config, and in the module > rules > use we want to add another loader – but instead of adding it’s name like the other 2, we need to add an oblect > it gets a few options: 1. loader, holy shit on the next one – around 15:30
 
 ```js
 const currentTask = process.env.npm_lifecycle_event
