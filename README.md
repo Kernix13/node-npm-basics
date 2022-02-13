@@ -35,6 +35,7 @@ To create a file use:
 touch test.js
 ```
 
+Export example:
 ```js
 module.exports = fxName;
 const fxName = require('./fileName.js)

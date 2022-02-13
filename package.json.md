@@ -1,4 +1,4 @@
-# Packason.json example
+# Packson.json example
 
 Here is an example of the boilerplate file when you run `npm init -y`:
 
