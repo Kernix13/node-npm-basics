@@ -180,9 +180,9 @@ They are added automatically when you use `npm install package-name`. Here is a 
 1. **@babel/preset-env**: a preset that allows you to use the latest JavaScript without needing to micromanage which syntax transforms are needed by your target environment(s)
 1. **@babel/preset-react**: Browsers do not understand `jsx`, but this tool is designed for `jsx`. USe the react babel tool for both your `dev` and `build` workflows. 
 1. **autoprefixer**: one of the most popular CSS processors, used to parse CSS and add vendor prefixes to CSS rules using values from Can I Use
-1. **babel-loader**: allows transpiling JavaScript files using Babel and webpack.
+1. **babel-loader**: allows transpiling JavaScript files using Babel and webpack. Use it to work with `jsx` files. 
 1. **clean-webpack-plugin**: For chunkhash...
-1. **css-loader**: use if a file ends in `.css`. `css-loader` lets webpack understand/bundle css, `style-loader` actually uses/applies the css
+1. **css-loader**: use if a file ends in `.css`. `css-loader` lets webpack understand/bundle css, `style-loader` actually uses/applies the css. Without this in out webpack.config file we would get an error after trying to import a css file.
 1. **css-minimizer-webpack-plugin**: uses `cssnano` to optimize and minify your CSS
 1. **fs-extra**: for multiple html pages, adds file system methods that aren't included in the native `fs` module
 1. **html-webpack-plugin**: simplifies creation of HTML files to serve your bundles

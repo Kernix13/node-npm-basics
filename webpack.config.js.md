@@ -152,3 +152,106 @@ module.exports = config
 ```
 
 **Note**: I do not understand everything in this file.
+
+## Important notes and questions
+
+- Webpack bundles or packs together all of your files and dependencies so that they are easy to deliver to the visitors to your websites
+- To start using webpack you need to install 2 packages: npm install webpack webpack-cli
+- Create a new folder and it needs this exact name: `src`. It needs that exact name because that is where webpack by default will look for our source code. It will look for index.js in the src folder. 
+- What is `npx`? 
+- `npx webpack` creates a `dist` folder and a bundled file called `main.js` inside of it. No matter how many files we have or how many packages we import/require from npm, webpack bundles it all together in that 1 file that we can have our visitos download
+- `run npx webpack` - what is this? Then `export default` and `import name from ...` 
+- Use `npx webpack --watch` so you don’t have to keep running `npx webpack`
+- **NOTE**: when you are writing client-side javascript like this, you do want to pay attention to the file size of your bundled file. Don’t obsess on the file size but keep it on your radar
+  - Whenever you import a package that you are going to force the visitors of your site to download, be mindful of the file size – a better approach is if you know you are only going to certain features and not the whole package, them import just that
+- `entry`: this is the entry into our application and for webpack to parse and bundle up the dependencies for
+- `devServer`: { } it gets an object – need to tell it which port to run on 
+- almost all professional development teams use some sort of CSS processing tool 
+- `sass-loader` is a package that allows it to work with Webpack. The #1 reason he prefers SASS → MIXINS – specifically for media queries
+
+## Second webpack.config file
+
+This file is from his YouTube video called *webpack devServer, hot module replacement (live reload)*. Another good video of Brad's on Webpack is *React, Babel, Sass webPack*.
+
+- `contentBase: path.resolve(__dirname, "dist"),`: which folder to use as the dev server preview
+- to stop seeing the warning in the console about production mode, add a prop of `mode: "development"`
+- "production" is for the live version of our website and will minify the file, and use short variable names, but it’s hard to debug while developing
+- `hot: true` is to inject the js into the page making it even faster
+- A more elegant way of calling our commands – `npm run dev` and `npm run build`
+
+```js
+const currentTask = process.env.npm_lifecycle_event
+const path = require("path")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+const WebpackManifestPlugin = require("webpack-manifest-plugin")
+
+const config = {
+  entry: "./app/app.js",
+  output: {
+    filename: "myBundle.[hash].js",
+    path: path.resolve(__dirname, "dist")
+  },
+  plugins: [new HtmlWebpackPlugin({ template: "./app/index.html" })],
+  mode: "development",
+  devtool: "eval-cheap-source-map",
+  devServer: {
+    port: 8080,
+    contentBase: path.resolve(__dirname, "dist"),
+    hot: true
+  },
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "sass-loader"]
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [["@babel/preset-env", { "useBuiltIns": "usage", "corejs": 3, "targets": "defaults" }], "@babel/preset-react"]
+          }
+        }
+      }
+    ]
+  }
+}
+
+if (currentTask == "build") {
+  config.mode = "production"
+  config.module.rules[0].use[0] = MiniCssExtractPlugin.loader
+  config.plugins.push(new MiniCssExtractPlugin({ filename: "main.[hash].css" }), new CleanWebpackPlugin(), new WebpackManifestPlugin())
+}
+
+module.exports = config
+```
+
+### Folder structure
+
+| symbol   | Meaning                      |
+| :------- | :--------------------------- |
+| /      | = Root directory               |
+| .      | = this location                |
+| ..     | = up a directory               |
+| ./     | = current directory            |
+| ../    | = parent of current directory  |
+| ../../ | = Two directories backwards    |
+
+## Netlify notes
+
+To set things up for netlify we will set up our build process to be completely automated. You won’t need a `dist` or `docs` folder on your computer, just work with your `app` folder. And any time you push your changes up, Netlify will run our build process for us and generate the public folder on its own. 
+
+It an alternative to traditional web hosting – they host our files and make out site available to the public. You have a few diff ways to create your first site with netlify:
+
+1. Drag & drop a folder from your computer
+1. Click New site from Git, choose that.
+
+Then choose where your git repo lives – Authorize Netlify – choose all repos – click Install. Next – Pick a repository. Under Basic build settings, in the Build cmd field type npm run build. Also check Publish directory field then click Deploy site. You’ll see a randomly generated name. Then that message changes to a link - when you push changes to your repo, netlify detects the change and runs `npm run build`.
+
+Becaause we deleted our docs folder, our github pages site will no longer work. Even though Netlify will do the builds for us, there may be a time in the future where we need to adjust our build process - you really only want your source code in the repo. So go into `gitignore`, add `docs/` below `node_modules/`. 
+
+More notes about Functions on Netlify and netlify > Deploys tab. 
