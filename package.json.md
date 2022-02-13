@@ -59,15 +59,17 @@ However, adding `--save-dev` to the command `npm install package-name` adds the 
 Description of the packages:
 
 1. **axios**: We could use the browser’s *fetch* functionality to send off an asynchronous request but instead use the 3rd party package called Axios. It’s cleaner and easier to work with than the *fetch api*. It makes sending off an asynchronous request easy.
-1. **lazysizes**: You do not need to include `--save-dev` at the end because it’s not a workflow package. It is a lazy loading library which does not negatively affect your SEO score with Google – the images are not hidden from the crawler. 
-1. **lodash**: Used to throttle the scroll call. We do not need the `--save-dev` part because lodash is not a package that makes our workflow or dev process easier, it’s a package we want to bundle / send along to our visitors – an actual direct dependency of our application. Lodash makes JavaScript easier by taking the hassle out of working with arrays, numbers, objects, strings, etc:  1. Iterating arrays, objects, & strings, 2. Manipulating & testing values, 3. Creating composite functions
+1. **lazysizes**: It is a lazy loading library which does not negatively affect your SEO score with Google – the images are not hidden from the crawler. 
+1. **lodash**: Used to throttle the scroll call. It’s a package we want to bundle / send along to our visitors – an actual direct dependency of our application. Lodash makes JavaScript easier by taking the hassle out of working with arrays, numbers, objects, strings, etc:  1. Iterating arrays, objects, & strings, 2. Manipulating & testing values, 3. Creating composite functions
 1. **normalize.css**: The way postcss handles imports. Add an import for it in the main style sheet. It is an alternative to css resets - use it on all of your projects. It preserves useful defaults and tries to normalize styles across browsers, instead of removing styles. If a browser does not adhere to the standard styles, Normalize aims to modify them to make styles consistent - only normalize needs the .css in the import statement in the main css file, none of the others do.
-1. **react**: 
+1. **react** and **react-dom**: react is the core of the library and react-dom is specifically for the web browser environment. A common package is `create-react-app`. 
 1. **react-dom**: 
 
 ###  Code snippet examples for the above packages
 
-Axios: use `npm install axios`: 
+You do not need `--save-dev` for any of these packages because they are a direct dependency of our app that we want visitors to have to download.
+
+**Axios**: use `npm install axios`: 
 
 ```js
 sendRequest() {
@@ -83,7 +85,7 @@ sendRequest() {
 ```
 `sendRequest()` is a method we created where we will communicate with our cloud function. `Axios.post()` will result in a promise. `post()` gets 2 args: 1) the url you want to send a request to,  2) is an object (check postman for the property).
 - - - 
-Lazysizes: just import it, you don’t need to name it, use `npm install lazysizes`:
+**Lazysizes**: just import it, you don’t need to name it, use `npm install lazysizes`:
 
 ```js
 import 'lazysizes'
@@ -95,7 +97,7 @@ Add the following class to all `img` tags:
 <img class="lazyload" sizes="(min-width: 970px) 976px, 100vw" data-srcset="assets/images/first-trip-low-res.jpg 565w, assets/images/first-trip.jpg 976w, assets/images/first-trip-hi-dpi.jpg 1952w" alt="Couple walking down a street.">
 ```
 - - - 
-Lodash: use `npm install lodash`:
+**Lodash**: use `npm install lodash`:
 
 ```js
 // just import throttle instead of entire library
@@ -103,25 +105,28 @@ import throttle from 'lodash/throttle'
 import debounce from 'lodash/debounce'
 ```
 - - - 
-Normalize.css: use 'npm install normalize.css`:
+**Normalize.css**: use `npm install normalize.css`:
 
 ```css
 @import 'normalize.css';
 ```
 - - - 
-react: use `npm install react`:
+**react**: use `npm install react react-dom`:
 ```js
-// 
+import React from 'react'
+import ReactDOM from 'react-dom'
 ```
 - - - 
-react-dom: use `npm install react-dom`:
+
+**react-dom**: See above for the npm command:
 ```js
-// 
+ReactDOM.render(<MyAmazingComponent />, document.querySelector("#my-react-example"))
 ```
+`render()` gets 2 arguments: 1) a component that you want to render to the page, 2) the element on the page you want to render to.  
 
 ## Dev dependencies
 
-These differ from the `dependencies` object by ...
+These differ from the `dependencies` object by ... (not sure)
 
 ```json
 {
@@ -150,26 +155,54 @@ These differ from the `dependencies` object by ...
 }
 ```
 
+Hee are the npm commands for all of those:
+```js
+npm install @babel/core @babel/preset-env babel-loader --save-dev
+npm install @babel/preset-react --save-dev
+npm install postcss-simple-vars postcss-nested autoprefixer --save-dev
+npm install clean-webpack-plugin --save-dev
+npm install css-loader style-loader --save-dev
+npm install fs-extra --save-dev
+npm install html-webpack-plugin --save-dev
+npm install css-minimizer-webpack-plugin
+npm install mini-css-extract-plugin --save-dev
+npm i -D postcss-import
+npm install postcss-import --save-dev
+npm install postcss-loader --save-dev
+npm install postcss-mixins --save-dev
+pm install --save-dev webpack-cli
+npm install webpack-dev-server --save-dev
+```
+
 They are added automatically when you use `npm install package-name`. Here is a breakdown of the packages and what they do:
 
-1. **@babel/core**: 
-1. **@babel/preset-env**: 
-1. **@babel/preset-react**: 
-1. **babel-loader**: 
-1. **autoprefixer**: 
-1. **babel-loader**: 
-1. **clean-webpack-plugin**: 
-1. **css-loader**: 
-1. **css-minimizer-webpack-plugin**: 
-1. **fs-extra**: 
-1. **html-webpack-plugin**: 
-1. **mini-css-extract-plugin**: 
-1. **postcss-import**: 
-1. **postcss-loader**: 
-1. **postcss-mixins**: 
-1. **postcss-nested**: 
-1. **postcss-simple-vars**: 
-1. **style-loader**: 
-1. **webpack**: 
-1. **webpack-cli**: 
-1. **webpack-dev-server**: 
+1. **@babel/core**: not sure
+1. **@babel/preset-env**: a preset that allows you to use the latest JavaScript without needing to micromanage which syntax transforms are needed by your target environment(s)
+1. **@babel/preset-react**: Browsers do not understand `jsx`, but this tool is designed for `jsx`. USe the react babel tool for both your `dev` and `build` workflows. 
+1. **autoprefixer**: one of the most popular CSS processors, used to parse CSS and add vendor prefixes to CSS rules using values from Can I Use
+1. **babel-loader**: allows transpiling JavaScript files using Babel and webpack.
+1. **clean-webpack-plugin**: For chunkhash...
+1. **css-loader**: use if a file ends in `.css`. `css-loader` lets webpack understand/bundle css, `style-loader` actually uses/applies the css
+1. **css-minimizer-webpack-plugin**: uses `cssnano` to optimize and minify your CSS
+1. **fs-extra**: for multiple html pages, adds file system methods that aren't included in the native `fs` module
+1. **html-webpack-plugin**: simplifies creation of HTML files to serve your bundles
+1. **mini-css-extract-plugin**: extract the css out of the main bundle - if you make a change to your css users don’t have to download the entire bundle again
+1. **postcss-import**: import is a native css feature but you don’t want the browser to have to download multiple css files – instead we want webpack and postcss to replace that line with the contents of the file. Wow in the main css file you can import your partial css files – you use `@import` but it is not a css import which slows things down
+1. **postcss-loader**: the post css package for webpack, adds PostCSS support
+1. **postcss-mixins**: configure our postcss setup to support mixins
+1. **postcss-nested**: unwraps nested rules the way Sass does
+1. **postcss-simple-vars**: plugin for Sass-like variables
+1. **style-loader**: see `css-loader`
+1. **webpack**: bundler
+1. **webpack-cli**: CLI for webpack. Webpack CLI provides the interface of options webpack uses in its configuration file. The CLI options override options passed in the configuration file
+1. **webpack-dev-server**: Updates the browser on changes, auto refresh with changes to the html and no refresh needed for css and js changes. Also to view our site on any device connected to the same wifi/network as the computer we are working on
+
+Code snippets:
+```js
+// for clean-webpack-plugin
+[chunkhash].js
+[chunkhash].css
+// postcss
+require("postcss-import") 
+require('postcss-mixins')
+```
