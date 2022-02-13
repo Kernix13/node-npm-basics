@@ -82,7 +82,7 @@ sendRequest() {
   }
 ```
 `sendRequest()` is a method we created where we will communicate with our cloud function. `Axios.post()` will result in a promise. `post()` gets 2 args: 1) the url you want to send a request to,  2) is an object (check postman for the property).
-
+- - - 
 Lazysizes: just import it, you don’t need to name it, use `npm install lazysizes`:
 
 ```js
@@ -94,7 +94,7 @@ Add the following class to all `img` tags:
 ```html
 <img class="lazyload" sizes="(min-width: 970px) 976px, 100vw" data-srcset="assets/images/first-trip-low-res.jpg 565w, assets/images/first-trip.jpg 976w, assets/images/first-trip-hi-dpi.jpg 1952w" alt="Couple walking down a street.">
 ```
-
+- - - 
 Lodash: use `npm install lodash`:
 
 ```js
@@ -102,11 +102,21 @@ Lodash: use `npm install lodash`:
 import throttle from 'lodash/throttle'
 import debounce from 'lodash/debounce'
 ```
-
+- - - 
 Normalize.css: use 'npm install normalize.css`:
 
 ```css
 @import 'normalize.css';
+```
+- - - 
+react: use `npm install react`:
+```js
+// 
+```
+- - - 
+react-dom: use `npm install react-dom`:
+```js
+// 
 ```
 
 ## Dev dependencies
