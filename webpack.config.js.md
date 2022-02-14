@@ -255,3 +255,64 @@ Then choose where your git repo lives – Authorize Netlify – choose all repos
 Becaause we deleted our docs folder, our github pages site will no longer work. Even though Netlify will do the builds for us, there may be a time in the future where we need to adjust our build process - you really only want your source code in the repo. So go into `gitignore`, add `docs/` below `node_modules/`. 
 
 More notes about Functions on Netlify and Netlify > Deploys tab. 
+
+## Another webpack file
+
+I think this may be from Kevin Powell' video but I'm not positive of that:
+
+```js
+// this is just a practice file
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  mode: 'development',
+  context: path.resolve(__dirname, "assets"),
+  output: {
+    path: path.resolve(__dirname, 'assets/dist'),
+    filename: 'main.bundle.js',
+  },
+  watch: true,
+  plugins: [
+    new MiniCssExtractPlugin()
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: [
+                require('tailwindcss'),
+                require('autoprefixer')
+              ]
+            }
+          }
+        ]
+      },
+    ]
+  },
+};
+```
+
+And for what it is worth, here is code from Kevin's `postcss.config.css`:
+
+```js
+module.exports = {
+  plugins: [
+    require('postcss-import'),
+    require('postcss-preset-env')({ stage: 1 }),
+    require('cssnano'),
+  ]
+}
+```
