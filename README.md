@@ -2,10 +2,10 @@
 
 Node.js is a JavaScript environment with funcionality specific to Node.
 
-1. Read files on out harddrive
-1. create new files
-1. It can make outgoing requests
-1. And listen for incoming requests
+1. Read files on hard drive
+1. Create new files
+1. It can make outgoing requests...
+1. ...and listen for incoming requests
 
 ## Basic Node.js commands
 
@@ -27,27 +27,26 @@ Have node run a Javascript file (either version):
 node fileName.js
 node fileName
 ```
-Require in a file: in a separate file create a function. Then to export it use the 1st command; use the 2nd command to import it into another file
 
 To create a file use:
-
 ```js
 touch test.js
 ```
+Require in a file: in a separate file create a function. Then to export it use the 1st command; use the 2nd command to import it into another file
 
 Export example:
 ```js
 module.exports = fxName;
 const fxName = require('./fileName.js)
 ```
-Importing modules that exist in the core of Node: e.g. File System (fs) https, assert, events, url, path, util, querystring
+Importing modules that exist in the core of Node: e.g. File System (fs) https, assert, events, url, path, util, querystring, ...
 
 ```js 
 const fs = require(fs)
 // to see entire list (on command line):
 require('module').builtinModules
 ```
-You can use the `fs` module to read the content in a file and modify it. For example, wrap text in an html tag and then export that into a newly created html file (each function requires 3 parameters)
+You can use the `fs` module to read the content in a file and modify it. For example, wrap text in an HTML tag and then export that into a newly created `*.html` file (each function requires 3 parameters)
 
 ```js 
 readFile(a, b, c) 
@@ -57,7 +56,7 @@ fs.readFile('./content.txt', 'utf=8', function(err, data) {
   if(err) throw err
   fs.writeFile('./index.html', `<h1>${data}</h1>`, function(err) {
     if (err) throw err
-    console.log("Successful)
+    console.log("Successful")
   })
 })
 ```
@@ -65,9 +64,9 @@ For `writeFile()`, `a` = location where you want to create the file so you can d
 
 Check out the [node documention](https://nodejs.org/dist/latest-v16.x/docs/api/ "Node docs") for more information on all the modules and their functions.
 
-**NOTE**: In the real world, 90+% of the time there is no need to manunally reasearch & use these core components of node. Instead you would use a community created package.
+**NOTE**: In the real world, 95% of the time there is no need to manually reasearch & use these core components of node. Instead you would use a community created package.
 
-Use node to download an image from the web: in order to send out a request onto the internet we'll require another package – `https` if your url has the `s` otherwise `http`: `get(a,b)` 
+***Use node to download an image from the web***: in order to send out a request onto the internet we'll require another package – `https` if your url has the `s` otherwise `http`: `get(a,b)` 
 
 Where `a` = the url and `b` = a function which gets the `pipe()` function and the `createWriteStream` method:
 
