@@ -85,15 +85,17 @@ fs.copySync()
 
 ## Common NPM packages and commands
 
-Common packages: `webpack`, `express`, `mongodb`, `postcss`, `react-dom`, `lodash`, `normalize.css`, etc.
+Common packages you wll see: `webpack`, `express`, `mongodb`, `postcss`, `react-dom`, `lodash`, `normalize.css`, etc.
 
 To create a `package.json` file  run the following once when you start a project:
 
 ```js
 npm init -y
 // to install node_modules:
-npm install
+npm install package-name
 ```
+
+Where `-y` means **yes** to any questions node may ask. The `install` command creates a `node_modules` folder in your project. 
 
 When you fork and clone a repo from say Github, it will **not** have a `node_modules` folder. But as long as it has a package.json file with the dependencies just run `npm install` to add the modules folder to your local project.
 
@@ -102,7 +104,7 @@ To install a package like `validator` and require it in a js file run:
 npm install validator
 const validator = require('validator')
 ```
-Where `-y` means **yes** to any questions node may ask. The `install` command creates a `node_modules` folder in your project. An example of avalidator function:
+An example of a validator function:
 
 ```js
 validator.isEmail('something-here')
@@ -149,9 +151,9 @@ Out of the box without any config, webpack only understands js files. To start u
 ```js
 npm install webpack webpack-cli  --save-dev
 ```
-Then y ou need to create a config file in your root directory called `webpack.config.js`. In it you tell webpack what you want it to do – you only need one property: `entry`. Then type the path to the file you want to bundle. 
+Then you need to create a config file in your root directory called `webpack.config.js`. In it you tell webpack what you want it to do – you only need one property: `entry`. Then type the path to the file you want to bundle. 
 
-To tell webpack hot to process and bundle the file(s), you need to include `module.exports =` then the obejct `{…}`. 
+To tell webpack how to process and bundle the file(s), you need to include `module.exports =` then the obejct `{…}`. 
 
 Now go into `package.json` and look for a property called `scripts`. You can create an **npm script** which you can run from the command line:
 
@@ -163,7 +165,11 @@ Now go into `package.json` and look for a property called `scripts`. You can cre
   },
 // To run that, on command line use:
 npm run dev
+// or 
+npm run build
 ```
+
+I don't think `serve` is supposed to be part of the `dev` value.
 
 `npm run build` creates a `dist` folder and a new file called `main.js`. To change the file name (`main.js`) or for the bundled file to go into a different folder other than `dist`, use: 
 
@@ -180,20 +186,3 @@ Webpack requires an absolute path for the output, so you need to **require** in 
 mode = watch: true
 ```
 See [webpack.config.js.md](https://github.com/Kernix13/node-npm-basics/blob/master/webpack.config.js.md) for detailed notes for that file, and [package.json.md](https://github.com/Kernix13/node-npm-basics/blob/master/package.json.md) for notes on that file.
-
-```js
-npm install webpack-dev-server --save-dev
-npm install html-webpack-plugin --save-dev
-npm run build
-npm run dev
-```
-
-create webpack.config.js
-
-```js
-watch: true
-module watch
---save-dev
-'css-loader?url=false'
-"postcss:watch": "postcss src/style.css --dir public --watch"
-```
