@@ -2,7 +2,15 @@
 
 Notes on my [webpack.config.js file](https://github.com/Kernix13/travel-site/blob/master/webpack.config.js "Webpack config file") from my repo `travel-site`.
 
-Lines 1-7 from the linked file above are just variables for some of the packages
+To see examples of the code go to [Webpack's Documentation page](https://webpack.js.org/concepts/ "Webpack Concepts"). Then look for the sub-navigation below the main nav at the top right - below the header. The most useful links in that nav area are:
+
+1. [Configuration](https://webpack.js.org/configuration/ "Webpack configuration"): Shows a heavily commented and large example of `webpack.config.js` with all the features and options you may need, although a lot of the sections do not list the actual code you need (e.g., `module: rules: use: options` ). 
+1. [Loaders](https://webpack.js.org/loaders/ "Loaders config"): As an exampe, scroll down to *Styling* and click on `style-loader`. On that age you will see code to put in your config file simliar to what I have below. 
+1. [Guides](https://webpack.js.org/guides/ "Setup Guide"): Here you want to check out the left-hand sidebar. Click on those links for config code. I have seen some documentation pages that are good to really good (MDN, WordPRess Theme Dev), and some that are horrible. The documentation on all the pages here are **EXCELLENT**!
+
+## Breakdown on my config file code 
+
+Lines 1-7 from my **Travel Site** linked file above are just variables for some of the packages
 ```js
 const currentTask = process.env.npm_lifecycle_event
 const path = require('path')
