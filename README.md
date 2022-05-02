@@ -93,7 +93,7 @@ To create a `package.json` file  run the following once when you start a project
 npm init -y
 // to install node_modules:
 npm install package-name
-<!--  -->to restore the node_modules file after deleting it:
+// to restore the node_modules file after deleting it:
 npm init
 ```
 
