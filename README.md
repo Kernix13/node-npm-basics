@@ -15,6 +15,18 @@ Check to see if `node` is installed on your local machine. If you see a version 
 node -v
 node
 ```
+
+**To update npm** to the latest version, run the following in the root directory:
+```npm
+npm i -g npm@8
+```
+
+To install all the dependencies for a project:
+
+```node
+npm i
+```
+
 To exit note, do either of the following
 
 ```js
