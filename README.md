@@ -21,7 +21,7 @@ node
 npm i -g npm@8
 ```
 
-To install all the dependencies for a project:
+To install all the dependencies for a project run the following. This step will automatically read and process the `package.json` file:
 
 ```node
 npm i
