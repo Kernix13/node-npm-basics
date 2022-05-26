@@ -1,5 +1,7 @@
 # Node.js and NPM basic commands
 
+This is a repo for basics on Node.js and NPM, as well as related subjects like using Webpack.
+
 Node.js is a JavaScript environment with funcionality specific to Node.
 
 1. Read files on hard drive
