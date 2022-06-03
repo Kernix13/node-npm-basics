@@ -23,6 +23,8 @@ node
 npm i -g npm@8
 ```
 
+To update Node.js check out the Usage section in the [nvm repo](https://github.com/nvm-sh/nvm#usage) or the [Node releases page](https://nodejs.org/en/blog/release/). I used the Node update wizard and that worked.
+
 To install all the dependencies for a project run the following. This step will automatically read and process the `package.json` file:
 
 ```node
