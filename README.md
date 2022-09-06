@@ -9,16 +9,29 @@ Node.js is a JavaScript environment with funcionality specific to Node.
 1. It can make outgoing requests...
 1. ...and listen for incoming requests
 
-## Basic Node.js commands
+<div id="back-to-top"></div>
+
+## Table of contents
+
+- [Basic Nodejs commands](#basic-nodejs-commands)
+- [Updating Node and npm](#updating-node-and-npm)
+- [Common NPM packages and commands](#common-npm-packages-and-commands)
+- [NPM Package installs](#npm-package-installs)
+- [Webpack and webpack config commands](#webpack-and-webpack-config-commands)
+- [Webpack links](#webpack-links)
+- [Miscellaneaous commands](#miscellaneaous-commands)
+
+## Basic Nodejs commands
 
 Check to see if `node` is installed on your local machine. If you see a version number then it is installed. The second command gets you into a node environment where you can run node commands:
 
 ```js
-node -v
-node
+node - v;
+node;
 ```
 
 **To update npm** to the latest version, run the following in the root directory:
+
 ```npm
 npm i -g npm@8
 ```
@@ -37,6 +50,7 @@ To exit note, do either of the following
 CTRL+C CTRL+C
 .exit
 ```
+
 Have node run a Javascript file (either version):
 
 ```js
@@ -45,44 +59,50 @@ node fileName
 ```
 
 To create a file use:
+
 ```js
 touch test.js
 ```
+
 Require in a file: in a separate file create a function. Then to export it use the 1st command; use the 2nd command to import it into another file
 
 Export example:
+
 ```js
 module.exports = fxName;
 const fxName = require('./fileName.js)
 ```
+
 Importing modules that exist in the core of Node: e.g. File System (fs) https, assert, events, url, path, util, querystring, ...
 
-```js 
-const fs = require(fs)
+```js
+const fs = require(fs);
 // to see entire list (on command line):
-require('module').builtinModules
+require("module").builtinModules;
 ```
+
 You can use the `fs` module to read the content in a file and modify it. For example, wrap text in an HTML tag and then export that into a newly created `*.html` file (each function requires 3 parameters)
 
-```js 
-readFile(a, b, c) 
-writeFile(a, b, c) 
+```js
+readFile(a, b, c);
+writeFile(a, b, c);
 // example
-fs.readFile('./content.txt', 'utf=8', function(err, data) {
-  if(err) throw err
-  fs.writeFile('./index.html', `<h1>${data}</h1>`, function(err) {
-    if (err) throw err
-    console.log("Successful")
-  })
-})
+fs.readFile("./content.txt", "utf=8", function (err, data) {
+  if (err) throw err;
+  fs.writeFile("./index.html", `<h1>${data}</h1>`, function (err) {
+    if (err) throw err;
+    console.log("Successful");
+  });
+});
 ```
+
 For `writeFile()`, `a` = location where you want to create the file so you can do `__dirname` for current folder: a = `__dirname + “/index.html”`.
 
 Check out the [node documention](https://nodejs.org/dist/latest-v16.x/docs/api/ "Node docs") for more information on all the modules and their functions.
 
 **NOTE**: In the real world, 95% of the time there is no need to manually reasearch & use these core components of node. Instead you would use a community created package.
 
-***Use node to download an image from the web***: in order to send out a request onto the internet we'll require another package – `https` if your url has the `s` otherwise `http`: `get(a,b)` 
+**_Use node to download an image from the web_**: in order to send out a request onto the internet we'll require another package – `https` if your url has the `s` otherwise `http`: `get(a,b)`
 
 Where `a` = the url and `b` = a function which gets the `pipe()` function and the `createWriteStream` method:
 
@@ -93,17 +113,47 @@ https.get(myPhotoLocation, function (response) {
 });
 ```
 
-Also: 
+Also:
+
 ```js
-tap()
-fs.copySync()
+tap();
+fs.copySync();
 ```
+
+<div align="right">&#8673; <a href="#back-to-top" title="Table of Contents">Back to Top</a></div>
+
+## Updating Node and npm
+
+> I am still uncertain of the correct way to update node but here are the notes I have for now.
+
+To update npm to the latest version, run the following in the root directory:
+
+```sh
+npm i -g npm@8
+```
+
+To update Node.js check out the Usage section in the nvm repo or the Node releases page. I used the Node update wizard and that worked.
+
+To install all the dependencies for a project run the following. This step will automatically read and process the package.json file:
+
+```sh
+npm i
+```
+
+Here are some links on the topic:
+
+- [Update Node.js to Latest Version](https://phoenixnap.com/kb/update-node-js-version)
+- [Update Node.js to the Latest Version in 2022](https://www.hostingadvice.com/how-to/update-node-js-latest-version/#windows)
+- [How to Update NodeJS Version on Windows](https://codeforgeek.com/update-nodejs-version-windows-linux-macos/)
+- [How to Easily Update Node.js](https://www.mend.io/free-developer-tools/blog/how-to-update-node-js-to-latest-version/#2_Updating_using_a_Node_version_manager_on_Windows)
+
+<div align="right">&#8673; <a href="#back-to-top" title="Table of Contents">Back to Top</a></div>
 
 ## Common NPM packages and commands
 
 Common packages you wll see: `webpack`, `express`, `mongodb`, `postcss`, `react-dom`, `lodash`, `normalize.css`, etc.
 
-To create a `package.json` file  run the following once when you start a project:
+To create a `package.json` file run the following once when you start a project:
 
 ```js
 npm init -y
@@ -113,28 +163,29 @@ npm install package-name
 npm init
 ```
 
-Where `-y` means **yes** to any questions node may ask. The `install` command creates a `node_modules` folder in your project. 
+Where `-y` means **yes** to any questions node may ask. The `install` command creates a `node_modules` folder in your project.
 
 When you fork and clone a repo from say Github, it will **not** have a `node_modules` folder. But as long as it has a package.json file with the dependencies just run `npm install` to add the modules folder to your local project.
 
 To install a package like `validator` and require it in a js file run:
+
 ```js
 npm install validator
 const validator = require('validator')
 ```
+
 An example of a validator function:
 
 ```js
-validator.isEmail('something-here')
+validator.isEmail("something-here");
 ```
 
-## Miscellaneaous commands:
+<div align="right">&#8673; <a href="#back-to-top" title="Table of Contents">Back to Top</a></div>
 
-I'll flesh these out later with notes but all these packages and commands are from the project I build from Brad Schiff's Udemy course called ***Git a Web Developer Job: Mastering the Modern Workflow***.
+## NPM Package installs
 
-## NPM Package installs:
+**PostCSS**:
 
-**PostCSS**: 
 ```js
 npm install postcss-simple-vars postcss-nested autoprefixer --save-dev
 npm install css-loader style-loader --save-dev
@@ -145,6 +196,7 @@ npm run postcss:watch --watch
 ```
 
 **Babel & React**:
+
 ```js
 npm install react react-dom
 npm install babel-loader
@@ -153,6 +205,7 @@ npm install @babel/core @babel/preset-env babel-loader --save-dev
 ```
 
 **Miscellaneous**:
+
 ```js
 npm install lodash
 npm install normalize.css
@@ -162,16 +215,19 @@ npm install fs-extra --save-dev
 npm install axios
 ```
 
-## Webpack and webpack.config.js commands:
+<div align="right">&#8673; <a href="#back-to-top" title="Table of Contents">Back to Top</a></div>
+
+## Webpack and webpack config commands
 
 Out of the box without any config, webpack only understands js files. To start using webpack you need to install 2 packages:
 
 ```js
 npm install webpack webpack-cli  --save-dev
 ```
-Then you need to create a config file in your root directory called `webpack.config.js`. In it you tell webpack what you want it to do – you only need one property: `entry`. Then type the path to the file you want to bundle. 
 
-To tell webpack how to process and bundle the file(s), you need to include `module.exports =` then the obejct `{…}`. 
+Then you need to create a config file in your root directory called `webpack.config.js`. In it you tell webpack what you want it to do – you only need one property: `entry`. Then type the path to the file you want to bundle.
+
+To tell webpack how to process and bundle the file(s), you need to include `module.exports =` then the obejct `{…}`.
 
 Now go into `package.json` and look for a property called `scripts`. You can create an **npm script** which you can run from the command line:
 
@@ -183,19 +239,19 @@ Now go into `package.json` and look for a property called `scripts`. You can cre
   },
 // To run that, on command line use:
 npm run dev
-// or 
+// or
 npm run build
 ```
 
 I don't think `serve` is supposed to be part of the `dev` value.
 
-`npm run build` creates a `dist` folder and a new file called `main.js`. To change the file name (`main.js`) or for the bundled file to go into a different folder other than `dist`, use: 
+`npm run build` creates a `dist` folder and a new file called `main.js`. To change the file name (`main.js`) or for the bundled file to go into a different folder other than `dist`, use:
 
 ```js
 output = {
-    filename: 'bundled.js',
-    path: path.resolve(__dirname, 'app')
-  }
+  filename: "bundled.js",
+  path: path.resolve(__dirname, "app")
+};
 ```
 
 Webpack requires an absolute path for the output, so you need to **require** in the node.js `path` package: `npm install path`. Then delete the `dist` folder, make a change in your js file then run `npm run build`. To have your file update automatically add:
@@ -203,4 +259,5 @@ Webpack requires an absolute path for the output, so you need to **require** in 
 ```js
 mode = watch: true
 ```
+
 See [webpack.config.js.md](https://github.com/Kernix13/node-npm-basics/blob/master/webpack.config.js.md) for detailed notes for that file, and [package.json.md](https://github.com/Kernix13/node-npm-basics/blob/master/package.json.md) for notes on that file.
