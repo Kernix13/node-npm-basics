@@ -5,7 +5,7 @@
 3. [VS Code download](https://code.visualstudio.com/download)
 
 
-VS Code settings.json
+VS Code settings.json - where did I paste my prettier extension settings?
 
 ```json
 {
