@@ -18,8 +18,7 @@ Node.js is a JavaScript environment with funcionality specific to Node.
 - [Common NPM packages and commands](#common-npm-packages-and-commands)
 - [NPM Package installs](#npm-package-installs)
 - [Webpack and webpack config commands](#webpack-and-webpack-config-commands)
-- [Webpack links](#webpack-links)
-- [Miscellaneaous commands](#miscellaneaous-commands)
+- [npm install vs npm ci](#npm-install-vs-npm-ci)
 
 ## Basic Nodejs commands
 
@@ -78,7 +77,7 @@ Importing modules that exist in the core of Node: e.g. File System (fs) https, a
 ```js
 const fs = require(fs);
 // to see entire list (on command line):
-require("module").builtinModules;
+require('module').builtinModules;
 ```
 
 You can use the `fs` module to read the content in a file and modify it. For example, wrap text in an HTML tag and then export that into a newly created `*.html` file (each function requires 3 parameters)
@@ -87,18 +86,18 @@ You can use the `fs` module to read the content in a file and modify it. For exa
 readFile(a, b, c);
 writeFile(a, b, c);
 // example
-fs.readFile("./content.txt", "utf=8", function (err, data) {
+fs.readFile('./content.txt', 'utf=8', function (err, data) {
   if (err) throw err;
-  fs.writeFile("./index.html", `<h1>${data}</h1>`, function (err) {
+  fs.writeFile('./index.html', `<h1>${data}</h1>`, function (err) {
     if (err) throw err;
-    console.log("Successful");
+    console.log('Successful');
   });
 });
 ```
 
 For `writeFile()`, `a` = location where you want to create the file so you can do `__dirname` for current folder: a = `__dirname + “/index.html”`.
 
-Check out the [node documention](https://nodejs.org/dist/latest-v16.x/docs/api/ "Node docs") for more information on all the modules and their functions.
+Check out the [node documention](https://nodejs.org/dist/latest-v16.x/docs/api/ 'Node docs') for more information on all the modules and their functions.
 
 **NOTE**: In the real world, 95% of the time there is no need to manually reasearch & use these core components of node. Instead you would use a community created package.
 
@@ -107,9 +106,10 @@ Check out the [node documention](https://nodejs.org/dist/latest-v16.x/docs/api/ 
 Where `a` = the url and `b` = a function which gets the `pipe()` function and the `createWriteStream` method:
 
 ```js
-var myPhotoLocation = "https://raw.githubusercontent.com/LearnWebCode/welcome-to-git/master/images/dog.jpg";
+var myPhotoLocation =
+  'https://raw.githubusercontent.com/LearnWebCode/welcome-to-git/master/images/dog.jpg';
 https.get(myPhotoLocation, function (response) {
-  response.pipe(fs.createWriteStream(__dirname + "/mydog.jpg"));
+  response.pipe(fs.createWriteStream(__dirname + '/mydog.jpg'));
 });
 ```
 
@@ -177,7 +177,7 @@ const validator = require('validator')
 An example of a validator function:
 
 ```js
-validator.isEmail("something-here");
+validator.isEmail('something-here');
 ```
 
 <div align="right">&#8673; <a href="#back-to-top" title="Table of Contents">Back to Top</a></div>
@@ -249,8 +249,8 @@ I don't think `serve` is supposed to be part of the `dev` value.
 
 ```js
 output = {
-  filename: "bundled.js",
-  path: path.resolve(__dirname, "app")
+  filename: 'bundled.js',
+  path: path.resolve(__dirname, 'app'),
 };
 ```
 
@@ -261,3 +261,34 @@ mode = watch: true
 ```
 
 See [webpack.config.js.md](https://github.com/Kernix13/node-npm-basics/blob/master/webpack.config.js.md) for detailed notes for that file, and [package.json.md](https://github.com/Kernix13/node-npm-basics/blob/master/package.json.md) for notes on that file.
+
+## npm install vs npm ci
+
+From a stackoverflow post [What is the difference between "npm install" and "npm ci"?](https://stackoverflow.com/questions/52499617/what-is-the-difference-between-npm-install-and-npm-ci):
+
+Use `npm install` to add new dependencies, and to update dependencies on a project. Usually, you would use it during development after pulling changes that update the list of dependencies but it may be a good idea to use `npm ci` in this case.
+
+Use `npm ci` if you need a deterministic, repeatable build. For example during continuous integration, automated jobs, etc. and when installing dependencies for the first time, instead of `npm install`.
+
+<ins>npm install</ins>
+
+`npm install` is great for development and in the CI when you want to cache the `node_modules` directory. When to use this? You can do this if you are making a package for other people to use.
+
+- Installs a package and all its dependencies.
+- Dependencies are driven by `npm-shrinkwrap.json` and `package-lock.json` (in that order).
+- without arguments: installs dependencies of a local module.
+- Can install global packages.
+- Will install any missing dependencies in node_modules.
+- It may write to `package.json` or `package-lock.json`.
+  - When used with an argument (`npm i packagename`) it may write to `package.json` to add or update the dependency.
+  - when used without arguments, (`npm i`) it may write to `package-lock.json` to lock down the version of some dependencies if they are not already in this file.
+
+<ins>npm ci</ins>
+
+`npm ci` should be used when you are to test and release a production application (a final product, not to be used by other packages) since it is important that you have the installation be as deterministic as possible, this install will take longer but will ultimately make your application more reliable.
+
+- Requires at least npm v5.7.1.
+- Requires `package-lock.json` or `npm-shrinkwrap.json` to be present.
+- Throws an error if dependencies from these two files don't match `package.json`.
+- Removes `node_modules` and install all dependencies at once.
+- It never writes to `package.json` or `package-lock.json`.
