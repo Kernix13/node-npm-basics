@@ -23,7 +23,7 @@
 
 ### How to Use package json file
 
-The package.json file is the center of any Node.js project or npm package. It stores information about your project, similar to how the <head> section of an HTML document describes the content of a webpage. It consists of a single JSON object where information is stored in key-value pairs. There are only two required fields; "name" and "version", but it’s good practice to provide additional information about your project that could be useful to future users or maintainers.
+The package.json file is the center of any Node.js project or npm package. It stores information about your project, similar to how the `<head>` section of an HTML document describes the content of a webpage. It consists of a single JSON object where information is stored in key-value pairs. There are only two required fields; "name" and "version", but it’s good practice to provide additional information about your project that could be useful to future users or maintainers.
 
 If you look at the file tree of your project, you will find the package.json file on the top level of the tree.
 
@@ -129,7 +129,7 @@ Here is an example of the boilerplate file when you run `npm init -y`:
 }
 ```
 
-Notes on my [package.json file](https://github.com/Kernix13/travel-site/blob/master/package.json "package.json file") from my repo `travel-site`.
+Notes on my [package.json file](https://github.com/Kernix13/travel-site/blob/master/package.json 'package.json file') from my repo `travel-site`.
 
 ## Scripts object
 
@@ -197,13 +197,18 @@ sendRequest() {
 **Lazysizes**: just import it, you don’t need to name it, use `npm install lazysizes`:
 
 ```js
-import "lazysizes";
+import 'lazysizes';
 ```
 
 Add the following class to all `img` tags:
 
 ```html
-<img class="lazyload" sizes="(min-width: 970px) 976px, 100vw" data-srcset="assets/images/first-trip-low-res.jpg 565w, assets/images/first-trip.jpg 976w, assets/images/first-trip-hi-dpi.jpg 1952w" alt="Couple walking down a street." />
+<img
+  class="lazyload"
+  sizes="(min-width: 970px) 976px, 100vw"
+  data-srcset="assets/images/first-trip-low-res.jpg 565w, assets/images/first-trip.jpg 976w, assets/images/first-trip-hi-dpi.jpg 1952w"
+  alt="Couple walking down a street."
+/>
 ```
 
 ---
@@ -212,8 +217,8 @@ Add the following class to all `img` tags:
 
 ```js
 // just import throttle instead of entire library
-import throttle from "lodash/throttle";
-import debounce from "lodash/debounce";
+import throttle from 'lodash/throttle';
+import debounce from 'lodash/debounce';
 ```
 
 ---
@@ -221,7 +226,7 @@ import debounce from "lodash/debounce";
 **Normalize.css**: use `npm install normalize.css`:
 
 ```css
-@import "normalize.css";
+@import 'normalize.css';
 ```
 
 ---
@@ -229,8 +234,8 @@ import debounce from "lodash/debounce";
 **react**: use `npm install react react-dom`:
 
 ```js
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 ```
 
 ---
@@ -238,7 +243,10 @@ import ReactDOM from "react-dom";
 **react-dom**: See above for the npm command:
 
 ```js
-ReactDOM.render(<MyAmazingComponent />, document.querySelector("#my-react-example"));
+ReactDOM.render(
+  <MyAmazingComponent />,
+  document.querySelector('#my-react-example')
+);
 ```
 
 `render()` gets 2 arguments: 1) a component that you want to render to the page, 2) the element on the page you want to render to.
@@ -323,6 +331,6 @@ Code snippets:
 // for clean-webpack-plugin
 [chunkhash].js[chunkhash].css;
 // postcss
-require("postcss-import");
-require("postcss-mixins");
+require('postcss-import');
+require('postcss-mixins');
 ```
